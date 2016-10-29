@@ -10,6 +10,8 @@
   "license": "MIT",
   "devDependencies": {
     "html-webpack-plugin": "^2.24.0",
-    "webpack": "^1.13.3"
+    "webpack": "^1.13.3",
+    "webpack-merge": "^0.15.0",
+    "webpack-validator": "^2.2.9"
   }
 }

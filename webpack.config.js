@@ -1,5 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const merge = require('webpack-merge');
+const validate = require('webpack-validator');
 
 /**
  * Define Useable Path
@@ -10,7 +12,7 @@ const PATHS = {
   build: path.join(__dirname, 'build'),
 };
 
-module.exports = {
+const common = {
   /**
    * Masukkan yang akan di proses
    * yang di ambil dari folder PATHS.app
@@ -42,3 +44,15 @@ module.exports = {
     }),
   ],
 };
+
+var config;
+
+switch (process.env.npm_lifecycle_event) {
+  case 'build':
+    config = merge(common, {});
+    break;
+  default:
+    config = merge(common, {});
+}
+
+module.exports = validate(config);

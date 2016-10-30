@@ -11,6 +11,7 @@ const parts = require('./lib/parts');
  */
 const PATHS = {
   app: path.join(__dirname, 'app'),
+  style: path.join(__dirname, 'app', 'main.css'),
   build: path.join(__dirname, 'build'),
 };
 
@@ -21,6 +22,7 @@ const common = {
    * @type {Object}
    */
   entry: {
+    style: PATHS.style,
     app: PATHS.app,
   },
 
@@ -76,7 +78,7 @@ switch (process.env.npm_lifecycle_event) {
         entries: ['react'],
       }),
       parts.minify(),
-      parts.setupCSS(PATHS.app));
+      parts.extractCSS(PATHS.style));
     break;
   default:
     config = merge(
@@ -85,7 +87,7 @@ switch (process.env.npm_lifecycle_event) {
         devtool: 'eval-source-map',
       },
       parts.minify(),
-      parts.setupCSS(PATHS.app),
+      parts.setupCSS(PATHS.style),
       parts.devServer({
         // untuk mengkustom host/port jika dibutuhkan
         host: process.env.HOST,

@@ -1,7 +1,3 @@
 body {
   background: #aeaeae;
 }
-
-:local(.redButton) {
-  background: red;
-}

@@ -61,6 +61,7 @@ switch (process.env.npm_lifecycle_event) {
       {
         devtool: 'source-map',
       },
+      parts.minify(),
       parts.setupCSS(PATHS.app));
     break;
   default:
@@ -69,6 +70,7 @@ switch (process.env.npm_lifecycle_event) {
       {
         devtool: 'eval-source-map',
       },
+      parts.minify(),
       parts.setupCSS(PATHS.app),
       parts.devServer({
         // untuk mengkustom host/port jika dibutuhkan

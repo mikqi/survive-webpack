@@ -3,6 +3,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const merge = require('webpack-merge');
 const validate = require('webpack-validator');
 
+const parts = require('./lib/parts');
+
 /**
  * Define Useable Path
  * @type {Object}
@@ -34,8 +36,8 @@ const common = {
   },
 
   /**
+  * apa saja yang digunakan dalam project
    * Pengaturan untuk mengatur list plugin
-   * apa saja yang digunakan dalam project
    * @type {Array}
    */
   plugins: [
@@ -47,12 +49,19 @@ const common = {
 
 var config;
 
+/**
+ * untuk mendeteksi bagaimana dijalankan
+ */
 switch (process.env.npm_lifecycle_event) {
   case 'build':
     config = merge(common, {});
     break;
   default:
-    config = merge(common, {});
+    config = merge(common, parts.devServer({
+      // untuk mengkustom host/port jika dibutuhkan
+      host: process.env.HOST,
+      port: process.env.PORT,
+    }));
 }
 
 module.exports = validate(config);

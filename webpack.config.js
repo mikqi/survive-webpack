@@ -32,7 +32,9 @@ const common = {
    */
   output: {
     path: PATHS.build,
-    filename: '[name].js',
+    filename: '[name].[hash].js',
+    sourceMapFilename: '[file].map',
+    devtoolModuleFilenameTemplate: 'webpack',
   },
 
   /**
@@ -56,11 +58,17 @@ switch (process.env.npm_lifecycle_event) {
   case 'build':
     config = merge(
       common,
+      {
+        devtool: 'source-map',
+      },
       parts.setupCSS(PATHS.app));
     break;
   default:
     config = merge(
       common,
+      {
+        devtool: 'eval-source-map',
+      },
       parts.setupCSS(PATHS.app),
       parts.devServer({
         // untuk mengkustom host/port jika dibutuhkan
